@@ -1,0 +1,33 @@
+/**
+ * Shared file between builds so that they can all use the same dependencies and
+ * maven repositories.
+ **/
+ext.deps = [:]
+def versions = [:]
+    versions.arouterApi = "1.5.0"
+    versions.arouterCompiler = "1.2.2"
+    versions.arouterRegister = "1.0.2"
+    versions.android_gradle_plugin = "3.5.2"
+ext.versions = versions
+
+def deps = [:]
+def arouter = [:]
+    arouter.api = "com.alibaba:arouter-api:$versions.arouterApi"
+    arouter.compiler = "com.alibaba:arouter-compiler:$versions.arouterCompiler"
+deps.arouter = arouter
+
+def build_versions = [:]
+    build_versions.min_sdk = 21
+    build_versions.target_sdk = 29
+    build_versions.build_tools = "29.0.2"
+    build_versions.android_gradle_plugin = "com.android.tools.build:gradle:$versions.android_gradle_plugin"
+ext.build_versions = build_versions
+
+ext.deps = deps
+
+def addRepos(RepositoryHandler handler) {
+    handler.google()
+    handler.jcenter()
+    handler.maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
+}
+ext.addRepos = this.&addRepos

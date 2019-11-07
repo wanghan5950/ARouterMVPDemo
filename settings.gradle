@@ -1,0 +1,2 @@
+include ':app', ':home', ':base', ':mine'
+rootProject.name='ARouterMVPDemo'
