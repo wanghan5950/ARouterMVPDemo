@@ -1,14 +1,32 @@
 package com.example.aroutermvpdemo;
 
-import androidx.appcompat.app.AppCompatActivity;
+import android.widget.Button;
 
-import android.os.Bundle;
+import com.alibaba.android.arouter.launcher.ARouter;
+import com.example.base.ARouterPathConstant;
+import com.example.base.base.BaseActivity;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+    protected int getContentLayout() {
+        return R.layout.activity_main;
     }
+
+    @Override
+    protected void initView() {
+        Button btnGoToHome = findViewById(R.id.btn_go_to_share);
+        btnGoToHome.setOnClickListener(v -> goToShare());
+        Button btnGotoLogin = findViewById(R.id.btn_go_to_login);
+        btnGotoLogin.setOnClickListener(v -> goToLogin());
+    }
+
+    private void goToShare() {
+        ARouter.getInstance().build(ARouterPathConstant.Home.HOME_ACTIVITY).withString("share_content", "分享内容").navigation();
+    }
+
+    private void goToLogin() {
+        ARouter.getInstance().build(ARouterPathConstant.Mine.MINE_ACTIVITY).navigation();
+    }
+
 }

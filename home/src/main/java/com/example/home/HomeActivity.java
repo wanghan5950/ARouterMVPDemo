@@ -1,22 +1,32 @@
 package com.example.home;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.os.Bundle;
+import android.text.TextUtils;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
-
+import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
+import com.example.base.ARouterPathConstant;
 import com.example.base.ServiceFactory;
+import com.example.base.base.BaseActivity;
 
-public class HomeActivity extends AppCompatActivity {
+@Route(path = ARouterPathConstant.Home.HOME_ACTIVITY)
+public class HomeActivity extends BaseActivity {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+    protected int getContentLayout() {
+        return R.layout.activity_home;
+    }
 
+    @Override
+    protected void initView() {
+        TextView tvState = findViewById(R.id.tv_state);
         Button btnShare = findViewById(R.id.btn_share);
-        btnShare.setOnClickListener(v -> share());
+        btnShare.setOnClickListener(v -> goToShare());
+        share();
+
+        String shareContent = getIntent().getStringExtra("share_content");
+        if (!TextUtils.isEmpty(shareContent)) tvState.setText(shareContent);
     }
 
     private void share() {
@@ -25,5 +35,9 @@ public class HomeActivity extends AppCompatActivity {
         } else {
             Toast.makeText(this, "分享失败：用户未登录", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private void goToShare() {
+        ARouter.getInstance().build(ARouterPathConstant.Mine.MINE_ACTIVITY).navigation();
     }
 }

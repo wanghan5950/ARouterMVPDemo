@@ -2,6 +2,7 @@ package com.example.aroutermvpdemo;
 
 import android.app.Application;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.example.base.AppConfig;
 import com.example.base.BaseApplication;
 import com.example.base.ServiceFactory;
@@ -11,16 +12,18 @@ public class MyApplication extends BaseApplication {
     @Override
     public void onCreate() {
         super.onCreate();
-
-        if (BuildConfig.DEBUG) {
-
-        }
-
+        initARouter();
         initModelApp(this);
         initModelData(this);
     }
 
-
+    private void initARouter() {
+        if (BuildConfig.DEBUG) {
+            ARouter.openDebug();
+            ARouter.openLog();
+        }
+        ARouter.init(this);
+    }
 
     @Override
     public void initModelApp(Application application) {
