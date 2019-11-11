@@ -1,6 +1,9 @@
 apply plugin: 'com.android.application'
 
 android {
+
+    resourcePrefix "app_"
+
     compileSdkVersion build_versions.target_sdk
     buildToolsVersion build_versions.build_tools
     defaultConfig {
@@ -12,7 +15,7 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         javaCompileOptions {
             annotationProcessorOptions {
-                arguments = [ moduleName : project.getName() ]
+                arguments = [ AROUTER_MODULE_NAME : project.getName() ]
             }
         }
     }
@@ -32,6 +35,6 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     annotationProcessor deps.arouter.compiler
     implementation project(':base')
-    implementation project(':home')
-    implementation project(':mine')
+    runtimeOnly project(':home')
+    runtimeOnly project(':mine')
 }
