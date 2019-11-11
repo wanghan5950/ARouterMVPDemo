@@ -10,7 +10,7 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected int getContentLayout() {
-        return R.layout.activity_main;
+        return R.layout.app_activity_main;
     }
 
     @Override

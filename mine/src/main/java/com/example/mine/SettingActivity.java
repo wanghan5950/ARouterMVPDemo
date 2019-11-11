@@ -6,7 +6,7 @@ public class SettingActivity extends BaseActivity {
 
     @Override
     protected int getContentLayout() {
-        return R.layout.activity_setting;
+        return R.layout.mine_activity_setting;
     }
 
     @Override

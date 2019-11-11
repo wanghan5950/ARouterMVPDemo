@@ -7,7 +7,7 @@ public class NewFragmentActivity extends BaseActivity {
 
     @Override
     protected int getContentLayout() {
-        return R.layout.activity_new_fragment;
+        return R.layout.app_activity_new_fragment;
     }
 
     @Override
